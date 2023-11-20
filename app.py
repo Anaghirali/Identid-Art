@@ -7,9 +7,9 @@ app = Flask(__name__)
 
 # Dicionário que mapeia nomes de imagens de referência 
 imagens_referencia = {
-    'mona.jpg': 'Mona Lisa - Obra famosa de Leonardo da Vinci',
-    'vangogh.jpg': 'Descrição de outra obra',
-    'lavie.png': 'Descrição de mais uma obra',
+    'mona.jpg': '"Mona Lisa" de Da Vinci: Pintada entre 1503 e 1506, durante o Renascimento italiano, refletindo a técnica realista e a busca pela representação humanística que caracterizaram esse movimento artístico.',
+    'vangogh.jpg': '"A Noite Estrelada" de Van Gogh: Criada em 1889, durante o período em que Van Gogh estava internado em um hospital psiquiátrico, reflete o estilo pós-impressionista do artista, caracterizado por pinceladas expressivas e cores intensas, demonstrando emoções e visões do artista sobre o céu noturno.',
+    'lavie.png': 'La Vie de Picasso: Criada em 1903 durante o período chamado "Período Azul" de Picasso, onde ele explorou temas de pobreza, solidão e tristeza. Este foi um período em que predominavam tons azuis e verdes em suas obras.',
 }
 
 #método identificador
@@ -19,6 +19,7 @@ def identificar_obra_de_arte(imagem_de_entrada):
 
     for imagem_referencia_nome, descricao in imagens_referencia.items():
         imagem_referencia = cv2.imread(os.path.join('imgs', imagem_referencia_nome))
+
         #transformando em branco e preto
         if imagem_referencia is not None:
             imagem_disponivel = True
@@ -41,7 +42,7 @@ def identificar_obra_de_arte(imagem_de_entrada):
                 resultados.append(f"A imagem corresponde à obra: {descricao}")
 
     return resultados
-
+#configuraçoes flask
 @app.route('/', methods=['GET', 'POST'])
 def index():
     resultados = None
